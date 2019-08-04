@@ -12,6 +12,7 @@ class TodoItem extends Component {
     }
     render() {
         const { content, testPropTypes } = this.props;
+        // JSX -> JS对象 -> 真实的DOM
         return (
             <div onClick={this.handleClick}>
                 {/* 子组件接收父组件的传递数据 */}

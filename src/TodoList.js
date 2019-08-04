@@ -28,7 +28,9 @@ class TodoList extends Component{
             this.setState((prevState) => ({
                 listArr: [...prevState.listArr, prevState.inputValue],
                 inputValue: ''
-            }))
+            }), () => {
+                console.log('当前列表的长度：',this.ul.querySelectorAll('div').length)
+            })
         }
     }
     // 输入框
@@ -36,7 +38,9 @@ class TodoList extends Component{
         // this.setState({
         //     inputValue: e.target.value
         // })
-        const value = e.target.value;
+        // const value = e.target.value;
+        // 使用ref获取input节点
+        const value = this.input.value
         this.setState(() => ({
             inputValue: value
         }))
@@ -72,9 +76,18 @@ class TodoList extends Component{
             )
         })
     }
+    // 在组件即将被挂载到页面的时候自动执行
+    componentWillMount(){
+        console.log('componentWillMount')
+    }
+    // 组件被挂在到页面之后，自动被执行
+    componentDidMount(){
+        console.log('componentDidMount')
+    }
+
     render() {
         console.log('Render')
-        console.log('list', this.state.listArr)
+        // console.log('list', this.state.listArr)
         return(
             <Fragment>
                 <div>
@@ -85,13 +98,14 @@ class TodoList extends Component{
                         className="input"
                         value={this.state.inputValue}
                         onChange={this.handleInputChange}
+                        ref={input => this.input=input}
                     />
                     <button onClick={this.handleBtnClick}>提交</button>
                 </div>
 
                 <TestProps content={this.state.inputValue}/>
                 
-                <ul>
+                <ul ref={ul => this.ul = ul}>
                     {
                         // this.state.listArr.map((item,index) => {
                         //     return (
