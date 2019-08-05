@@ -1,3 +1,50 @@
 .input {
     border: solid 1px red;
 }
+
+/* ReactAnim */
+.show {
+    /* 过渡动画效果 */
+    transition: all 1s ease-in;
+    /* 动画效果 */
+    /* animation: show-item 2s ease-in forwards; */
+    opacity: 1;
+}
+.hide {
+    opacity: 0;
+    /* 过渡动画效果 */
+    /* transition: all 1s ease-in; */
+    /* 动画效果 */
+    /* forwards 动画结束后,保持动画最后一帧的样式 */
+    animation: hide-item 2s ease-in forwards;
+}
+
+@keyframes show-item {
+    0% {
+        opacity: 0;
+        color: red;
+    }
+    50% {
+        opacity: 0.5;
+        color: green;
+    }
+    100% {
+        opacity: 1;
+        color: blue;
+    }
+}
+
+@keyframes hide-item {
+    0% {
+        opacity: 1;
+        color: red;
+    }
+    50% {
+        opacity: 0.5;
+        color: green;
+    }
+    100% {
+        opacity: 0;
+        color: blue;
+    }
+}

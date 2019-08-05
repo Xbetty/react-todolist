@@ -3,6 +3,7 @@ import TodoItem from './TodoItem';
 import TestProps from './TestProps';
 import axiox from 'axios';
 import './style.css'
+import ReactAnim from './ReactAnim';
 
 class TodoList extends Component{
     constructor(props){
@@ -143,6 +144,8 @@ class TodoList extends Component{
                         this.getTodoItem()
                     }
                 </ul>
+
+                <ReactAnim/>
             </Fragment>
         )
     }
