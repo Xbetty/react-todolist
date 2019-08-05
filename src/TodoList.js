@@ -144,7 +144,7 @@ class TodoList extends Component{
                         this.getTodoItem()
                     }
                 </ul>
-
+                <hr/>
                 <ReactAnim/>
             </Fragment>
         )
