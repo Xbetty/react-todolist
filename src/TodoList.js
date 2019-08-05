@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import TodoItem from './TodoItem';
 import TestProps from './TestProps';
+import axiox from 'axios';
 import './style.css'
 
 class TodoList extends Component{
@@ -76,17 +77,36 @@ class TodoList extends Component{
             )
         })
     }
-    // 在组件即将被挂载到页面的时候自动执行
+    // 在组件即将被挂载到页面的时候，自动被执行
     componentWillMount(){
         console.log('componentWillMount')
     }
     // 组件被挂在到页面之后，自动被执行
     componentDidMount(){
         console.log('componentDidMount')
+        axiox.get('/api/todolist')
+        .then(() => console.log('success'))
+        .catch(() => console.log('error'))
     }
-
+    // componentWillReceiveProps() {
+    //     console.log('componentWillReceiveProps')
+    // }
+    // 组件被更新之前，自动被执行
+    shouldComponentUpdate() {
+        console.log('shouldComponentUpdate')
+        return true
+    }
+    // 组件被更新之前，它会自动执行，但是它在shouldComponentUpdate()之后执行
+    // 如果shouldComponentUpdate()返回true，componentWillUpdate函数才执行，否则该函数不执行
+    componentWillUpdate() {
+        console.log('componentWillUpdate')
+    }
+    // 组件更新完成之后,被自动执行
+    componentDidUpdate() {
+        console.log('componentDidUpdate')
+    }
     render() {
-        console.log('Render')
+        console.log('Parent Render')
         // console.log('list', this.state.listArr)
         return(
             <Fragment>

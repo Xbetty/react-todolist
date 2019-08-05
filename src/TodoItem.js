@@ -5,12 +5,32 @@ class TodoItem extends Component {
         super(props);
         this.handleClick = this.handleClick.bind(this);
     }
+    // 一个组件要从父组件接收参数
+    // 只要父组件的render函数被重新执行了，子组件的这个生命周期函数就会被执行
+    // 如果这个组件第一次存在于父组件中，不会执行
+    // 如果这个组件之前已经存在于父组件中,才会执行
+    componentWillReceiveProps() {
+        console.log('child componentWillReceiveProps')
+    }
+    // 当此组件即将被从页面中剔除
+    componentWillUnmount() {
+        console.log('componentWillUnmount')
+    }
     handleClick() {
         const { deleteItem, index } = this.props;
         // 子组件通过调用父组件的方法更改父组件的数据
         deleteItem(index);
     }
+    shouldComponentUpdate(nextProps, nextState) {
+        // 当input框内输入的值发生改变,组件才重新渲染
+        if (nextProps.content !== this.props.content) {
+            return true
+        } else {
+            return false
+        }
+    }
     render() {
+        console.log('Child Render')
         const { content, testPropTypes } = this.props;
         // JSX -> JS对象 -> 真实的DOM
         return (
