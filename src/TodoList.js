@@ -1,9 +1,14 @@
 import React, { Component, Fragment } from 'react';
+// 引入antd组件
+import 'antd/dist/antd.css';
+import {Input, Button, List} from 'antd';
+
+
 import TodoItem from './TodoItem';
 import TestProps from './TestProps';
 import axiox from 'axios';
-import './style.css'
 import ReactAnim from './ReactAnim';
+import './style.css'
 
 class TodoList extends Component{
     constructor(props){
@@ -37,15 +42,15 @@ class TodoList extends Component{
     }
     // 输入框
     handleInputChange(e) {
-        // this.setState({
-        //     inputValue: e.target.value
-        // })
-        // const value = e.target.value;
+        this.setState({
+            inputValue: e.target.value
+        })
+        const value = e.target.value;
         // 使用ref获取input节点
-        const value = this.input.value
-        this.setState(() => ({
-            inputValue: value
-        }))
+        // const value = this.input.value
+        // this.setState(() => ({
+        //     inputValue: value
+        // }))
     }
     // 点击单个item
     handleItemDelete(index) {
@@ -114,14 +119,19 @@ class TodoList extends Component{
                 <div>
                     {/* label的作用是扩大点击区域 */}
                     <label htmlFor="insertArea">输入内容：</label>
-                    <input
+                    <Input
+                        placeholder='todo info'
+                        style={{
+                            width: '300px',
+                            marginTop: '10px'
+                        }}
                         id="insertArea"
                         className="input"
                         value={this.state.inputValue}
                         onChange={this.handleInputChange}
                         ref={input => this.input=input}
                     />
-                    <button onClick={this.handleBtnClick}>提交</button>
+                    <Button onClick={this.handleBtnClick} style={{marginLeft:'10px'}}>提交</Button>
                 </div>
 
                 <TestProps content={this.state.inputValue}/>
@@ -144,7 +154,6 @@ class TodoList extends Component{
                         this.getTodoItem()
                     }
                 </ul>
-                <hr/>
                 <ReactAnim/>
             </Fragment>
         )
