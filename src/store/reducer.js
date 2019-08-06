@@ -1,4 +1,5 @@
 // 笔记本的默认数据
+import { CHANGE_INPUT_VALUE, ADD_TODO_ITEM, DELETE_TODO_ITEM } from './actionTypes'
 const defaultState = {
     inputValue: '',
     listArr: []
@@ -8,14 +9,14 @@ const defaultState = {
 export default (state = defaultState, action) => {
     console.log('state', state)
     console.log('action', action)
-    if (action.type === 'change_input_value') {
+    if (action.type === CHANGE_INPUT_VALUE) {
         // 对state作深拷贝
         const newState = JSON.parse(JSON.stringify(state))
         newState.inputValue = action.inputValue
         return newState
     }
     // 新增
-    if (action.type === 'add_todo_item') {
+    if (action.type === ADD_TODO_ITEM) {
         const newState = JSON.parse(JSON.stringify(state))
         newState.listArr.push(newState.inputValue)
         newState.inputValue=''
@@ -23,7 +24,7 @@ export default (state = defaultState, action) => {
         return newState
     }
     // 删除
-    if (action.type === 'delete_todo_item') {
+    if (action.type === DELETE_TODO_ITEM) {
         const newState = JSON.parse(JSON.stringify(state))
         newState.listArr.splice(action.index, 1)
         return newState

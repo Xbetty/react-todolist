@@ -8,6 +8,8 @@ import axiox from 'axios';
 import ReactAnim from './ReactAnim';
 // 引入store目录下的index.js
 import store from './store'
+// 引入actionTypes
+import {CHANGE_INPUT_VALUE, ADD_TODO_ITEM, DELETE_TODO_ITEM} from './store/actionTypes'
 import './style.css'
 
 class TodoList extends Component{
@@ -51,7 +53,7 @@ class TodoList extends Component{
 
         // redux实现列表的新增
         const action = {
-            type: 'add_todo_item'
+            type: ADD_TODO_ITEM
         }
         store.dispatch(action)
     }
@@ -66,7 +68,7 @@ class TodoList extends Component{
         // 创建action，更改store中的state数据
         const action = {
             // 描述做什么事情
-            type: 'change_input_value',
+            type: CHANGE_INPUT_VALUE,
             inputValue: e.target.value
         }
         // 调用dispatch()，把action传给store
@@ -105,7 +107,7 @@ class TodoList extends Component{
 
         // redux实现删除
         const action = {
-            type: 'delete_todo_item',
+            type: DELETE_TODO_ITEM,
             index
         }
         store.dispatch(action)
