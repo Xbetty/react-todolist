@@ -23,7 +23,7 @@ class TodoList extends Component{
         // 将公共数据的值赋值给state
         this.state = store.getState()
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleItemDelete = this.handleItemDelete.bind(this);
+        // this.handleItemDelete = this.handleItemDelete.bind(this);
         this.handleBtnClick = this.handleBtnClick.bind(this);
         this.handleStoreChange = this.handleStoreChange.bind(this);
         
@@ -49,7 +49,7 @@ class TodoList extends Component{
         //     })
         // }
 
-        // 
+        // redux实现列表的新增
         const action = {
             type: 'add_todo_item'
         }
@@ -84,6 +84,7 @@ class TodoList extends Component{
     }
     // 点击单个item
     handleItemDelete(index) {
+        console.log('index', index)
         // immutable
         // state 不允许我们做任何的改变
         // const listArr = [...this.state.listArr]
@@ -92,11 +93,22 @@ class TodoList extends Component{
         // this.setState({
         //     listArr
         // })
-        this.setState((prevState) => {
-            const listArr = [...prevState.listArr] 
-            listArr.splice(index, 1)
-            return { listArr }
-        })
+
+
+
+        // this.setState((prevState) => {
+        //     const listArr = [...prevState.listArr] 
+        //     listArr.splice(index, 1)
+        //     return { listArr }
+        // })
+
+
+        // redux实现删除
+        const action = {
+            type: 'delete_todo_item',
+            index
+        }
+        store.dispatch(action)
     }
     // 获取TodoItem
     getTodoItem() {
@@ -176,7 +188,7 @@ class TodoList extends Component{
                     bordered
                     dataSource={this.state.listArr}
                     renderItem={(item, index) => (
-                        <List.Item>
+                        <List.Item onClick={this.handleItemDelete.bind(this, index)}>
                         <Typography.Text mark>[{index}]</Typography.Text> {item}
                         </List.Item>
                     )}
