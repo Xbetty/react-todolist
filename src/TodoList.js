@@ -10,6 +10,8 @@ import ReactAnim from './ReactAnim';
 import store from './store'
 // 引入actionTypes
 import {CHANGE_INPUT_VALUE, ADD_TODO_ITEM, DELETE_TODO_ITEM} from './store/actionTypes'
+// 引入actionCreator
+import {getInputChangeAction, getAddItemAction, getDeleteTtemAction} from './store/actionCreators'
 import './style.css'
 
 class TodoList extends Component{
@@ -52,9 +54,10 @@ class TodoList extends Component{
         // }
 
         // redux实现列表的新增
-        const action = {
-            type: ADD_TODO_ITEM
-        }
+        // const action = {
+        //     type: ADD_TODO_ITEM
+        // }
+        const action = getAddItemAction()
         store.dispatch(action)
     }
     // 输入框
@@ -66,11 +69,14 @@ class TodoList extends Component{
 
 
         // 创建action，更改store中的state数据
-        const action = {
-            // 描述做什么事情
-            type: CHANGE_INPUT_VALUE,
-            inputValue: e.target.value
-        }
+        // const action = {
+        //     // 描述做什么事情
+        //     type: CHANGE_INPUT_VALUE,
+        //     inputValue: e.target.value
+        // }
+
+
+        const action = getInputChangeAction(e.target.value)
         // 调用dispatch()，把action传给store
         store.dispatch(action)
 
@@ -106,10 +112,11 @@ class TodoList extends Component{
 
 
         // redux实现删除
-        const action = {
-            type: DELETE_TODO_ITEM,
-            index
-        }
+        // const action = {
+        //     type: DELETE_TODO_ITEM,
+        //     index
+        // }
+        const action = getDeleteTtemAction(index)
         store.dispatch(action)
     }
     // 获取TodoItem
