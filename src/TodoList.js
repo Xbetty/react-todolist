@@ -1,17 +1,16 @@
 import React, { Component, Fragment } from 'react';
 // 引入antd组件
-import 'antd/dist/antd.css';
-import {Input, Button, List, Typography } from 'antd';
+// import 'antd/dist/antd.css';
+// import {Input, Button, List, Typography } from 'antd';
 import TodoItem from './TodoItem';
-import TestProps from './TestProps';
+// import TestProps from './TestProps';
 import axiox from 'axios';
-import ReactAnim from './ReactAnim';
+// import ReactAnim from './ReactAnim';
 // 引入store目录下的index.js
 import store from './store'
-// 引入actionTypes
-import {CHANGE_INPUT_VALUE, ADD_TODO_ITEM, DELETE_TODO_ITEM} from './store/actionTypes'
 // 引入actionCreator
 import {getInputChangeAction, getAddItemAction, getDeleteTtemAction} from './store/actionCreators'
+import TodoListUI from './TodoListUI'
 import './style.css'
 
 class TodoList extends Component{
@@ -27,7 +26,7 @@ class TodoList extends Component{
         // 将公共数据的值赋值给state
         this.state = store.getState()
         this.handleInputChange = this.handleInputChange.bind(this);
-        // this.handleItemDelete = this.handleItemDelete.bind(this);
+        this.handleItemDelete = this.handleItemDelete.bind(this);
         this.handleBtnClick = this.handleBtnClick.bind(this);
         this.handleStoreChange = this.handleStoreChange.bind(this);
         
@@ -57,6 +56,8 @@ class TodoList extends Component{
         // const action = {
         //     type: ADD_TODO_ITEM
         // }
+
+        // 引入actionCreator
         const action = getAddItemAction()
         store.dispatch(action)
     }
@@ -67,6 +68,13 @@ class TodoList extends Component{
         // })
 
 
+        // const value = e.target.value;
+        // 使用ref获取input节点
+        // const value = this.input.value
+        // this.setState(() => ({
+        //     inputValue: value
+        // }))
+
 
         // 创建action，更改store中的state数据
         // const action = {
@@ -76,20 +84,12 @@ class TodoList extends Component{
         // }
 
 
+        // 引入actionCreator
         const action = getInputChangeAction(e.target.value)
         // 调用dispatch()，把action传给store
         store.dispatch(action)
-
-
-
-
-        // const value = e.target.value;
-        // 使用ref获取input节点
-        // const value = this.input.value
-        // this.setState(() => ({
-        //     inputValue: value
-        // }))
     }
+
     // 点击单个item
     handleItemDelete(index) {
         console.log('index', index)
@@ -116,6 +116,8 @@ class TodoList extends Component{
         //     type: DELETE_TODO_ITEM,
         //     index
         // }
+
+        // // 引入actionCreator
         const action = getDeleteTtemAction(index)
         store.dispatch(action)
     }
@@ -134,16 +136,19 @@ class TodoList extends Component{
             )
         })
     }
+
     // store发生变化
     handleStoreChange() {
         console.log('handleStoreChange')
         // 同步store中的数据
         this.setState(store.getState())
     }
+
     // 在组件即将被挂载到页面的时候，自动被执行
     componentWillMount(){
         console.log('componentWillMount')
     }
+
     // 组件被挂在到页面之后，自动被执行
     componentDidMount(){
         console.log('componentDidMount')
@@ -151,78 +156,94 @@ class TodoList extends Component{
         .then(() => console.log('success'))
         .catch(() => console.log('error'))
     }
+
     // componentWillReceiveProps() {
     //     console.log('componentWillReceiveProps')
     // }
+
+
     // 组件被更新之前，自动被执行
     shouldComponentUpdate() {
         console.log('shouldComponentUpdate')
         return true
     }
+
     // 组件被更新之前，它会自动执行，但是它在shouldComponentUpdate()之后执行
     // 如果shouldComponentUpdate()返回true，componentWillUpdate函数才执行，否则该函数不执行
     componentWillUpdate() {
         console.log('componentWillUpdate')
     }
+
     // 组件更新完成之后,被自动执行
     componentDidUpdate() {
         console.log('componentDidUpdate')
     }
+
     render() {
         console.log('Parent Render')
         // console.log('list', this.state.listArr)
         return(
-            <Fragment>
-                <div style={{marginBottom: '20px'}}>
-                    {/* label的作用是扩大点击区域 */}
-                    <label htmlFor="insertArea">输入内容：</label>
-                    <Input
-                        placeholder='todo info'
-                        style={{
-                            width: '300px',
-                            marginTop: '10px'
-                        }}
-                        id="insertArea"
-                        className="input"
-                        value={this.state.inputValue}
-                        onChange={this.handleInputChange}
-                        ref={input => this.input=input}
-                    />
-                    <Button onClick={this.handleBtnClick} style={{marginLeft:'10px'}}>提交</Button>
-                </div>
-                <TestProps content={this.state.inputValue}/>
-                <List
-                    header={<div>Header</div>}
-                    footer={<div>Footer</div>}
-                    bordered
-                    dataSource={this.state.listArr}
-                    renderItem={(item, index) => (
-                        <List.Item onClick={this.handleItemDelete.bind(this, index)}>
-                        <Typography.Text mark>[{index}]</Typography.Text> {item}
-                        </List.Item>
-                    )}
-                    />
+            // <Fragment>
+            //     <div style={{marginBottom: '20px'}}>
+            //         {/* label的作用是扩大点击区域 */}
+            //         <label htmlFor="insertArea">输入内容：</label>
+            //         <Input
+            //             placeholder='todo info'
+            //             style={{
+            //                 width: '300px',
+            //                 marginTop: '10px'
+            //             }}
+            //             id="insertArea"
+            //             className="input"
+            //             value={this.state.inputValue}
+            //             onChange={this.handleInputChange}
+            //             ref={input => this.input=input}
+            //         />
+            //         <Button onClick={this.handleBtnClick} style={{marginLeft:'10px'}}>提交</Button>
+            //     </div>
+            //     <TestProps content={this.state.inputValue}/>
+            //     <List
+            //         header={<div>Header</div>}
+            //         footer={<div>Footer</div>}
+            //         bordered
+            //         dataSource={this.state.listArr}
+            //         renderItem={(item, index) => (
+            //             <List.Item onClick={this.handleItemDelete.bind(this, index)}>
+            //             <Typography.Text mark>[{index}]</Typography.Text> {item}
+            //             </List.Item>
+            //         )}
+            //         />
                 
-                <ul ref={ul => this.ul = ul}>
-                    {
-                        // this.state.listArr.map((item,index) => {
-                        //     return (
-                        //         <div>
-                        //             <TodoItem
-                        //                 // 父组件向子组件传递数据
-                        //                 content={item} 
-                        //                 index={index}
-                        //                 // 子组件修改父组件的数据
-                        //                 deleteItem={this.handleItemDelete}
-                        //             />
-                        //         </div>
-                        //     )
-                        // })
-                        this.getTodoItem()
-                    }
-                </ul>
-                <ReactAnim/>
-            </Fragment>
+            //     <ul ref={ul => this.ul = ul}>
+            //         {
+            //             // this.state.listArr.map((item,index) => {
+            //             //     return (
+            //             //         <div>
+            //             //             <TodoItem
+            //             //                 // 父组件向子组件传递数据
+            //             //                 content={item} 
+            //             //                 index={index}
+            //             //                 // 子组件修改父组件的数据
+            //             //                 deleteItem={this.handleItemDelete}
+            //             //             />
+            //             //         </div>
+            //             //     )
+            //             // })
+            //             this.getTodoItem()
+            //         }
+            //     </ul>
+            //     <ReactAnim/>
+            // </Fragment>
+
+            // 拆分ui组件,ui组件为傻瓜组件,容器组件为聪明组件
+            // ui组件负责页面的渲染,容器组件负责逻辑
+            <TodoListUI 
+                inputValue={this.state.inputValue}
+                listArr = {this.state.listArr}
+                handleInputChange = {this.handleInputChange}
+                handleBtnClick = {this.handleBtnClick}
+                handleItemDelete = {this.handleItemDelete}
+            />
         )
     }
 }

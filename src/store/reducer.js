@@ -25,6 +25,7 @@ export default (state = defaultState, action) => {
     }
     // 删除
     if (action.type === DELETE_TODO_ITEM) {
+        console.log('reducer-index', action.index)
         const newState = JSON.parse(JSON.stringify(state))
         newState.listArr.splice(action.index, 1)
         return newState
