@@ -1,5 +1,5 @@
 // 笔记本的默认数据
-import { CHANGE_INPUT_VALUE, ADD_TODO_ITEM, DELETE_TODO_ITEM } from './actionTypes'
+import { CHANGE_INPUT_VALUE, ADD_TODO_ITEM, DELETE_TODO_ITEM, INIT_LIST_ACTION } from './actionTypes'
 const defaultState = {
     inputValue: '',
     listArr: []
@@ -13,6 +13,12 @@ export default (state = defaultState, action) => {
         // 对state作深拷贝
         const newState = JSON.parse(JSON.stringify(state))
         newState.inputValue = action.inputValue
+        return newState
+    }
+    if (action.type === INIT_LIST_ACTION) {
+        // 对state作深拷贝
+        const newState = JSON.parse(JSON.stringify(state))
+        newState.listArr = action.data
         return newState
     }
     // 新增
@@ -30,5 +36,6 @@ export default (state = defaultState, action) => {
         newState.listArr.splice(action.index, 1)
         return newState
     }
-    return state
+
+    
 }

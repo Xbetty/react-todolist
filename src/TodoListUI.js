@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, { Fragment} from 'react';
 import ReactAnim from './ReactAnim';
 // 引入antd组件
 import 'antd/dist/antd.css';

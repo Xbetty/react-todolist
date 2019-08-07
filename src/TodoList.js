@@ -1,15 +1,15 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 // 引入antd组件
 // import 'antd/dist/antd.css';
 // import {Input, Button, List, Typography } from 'antd';
 import TodoItem from './TodoItem';
 // import TestProps from './TestProps';
-import axiox from 'axios';
+// import axiox from 'axios';
 // import ReactAnim from './ReactAnim';
 // 引入store目录下的index.js
 import store from './store'
 // 引入actionCreator
-import {getInputChangeAction, getAddItemAction, getDeleteTtemAction} from './store/actionCreators'
+import {getInputChangeAction, getAddItemAction, getDeleteTtemAction, getTodoList,} from './store/actionCreators'
 import TodoListUI from './TodoListUI'
 import './style.css'
 
@@ -152,9 +152,21 @@ class TodoList extends Component{
     // 组件被挂在到页面之后，自动被执行
     componentDidMount(){
         console.log('componentDidMount')
-        axiox.get('/api/todolist')
-        .then(() => console.log('success'))
-        .catch(() => console.log('error'))
+        // axiox.get('https://getman.cn/mock/api/todolist')
+        // .then((res) => {
+        //     console.log('success')
+        //     const data = res.data
+        //     const action = initListAction(data)
+        //     store.dispatch(action)
+        // })
+        // .catch(() => {
+        //     console.log('error')
+        // })
+
+
+        const action = getTodoList()
+        store.dispatch(action)
+        console.log('action', action)
     }
 
     // componentWillReceiveProps() {
