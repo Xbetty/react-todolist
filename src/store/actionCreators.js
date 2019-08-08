@@ -23,6 +23,7 @@ export const initListAction = (data) => ({
 // 加入了react-thunk中间件之后,可以返回一个函数
 export const getTodoList = () => {
     // 返回的函数自动接收dispatch方法
+    console.log('getTodoList')
     return (dispatch) => {
         axiox.get('https://getman.cn/mock/api/todolist')
         .then((res) => {

@@ -7,14 +7,15 @@ const defaultState = {
 // reducer返回的必须是一个函数，函数里面接收两个参数，reducer负责管理整个应用中的数据
 // reducer可以接收state，但是绝不能修改state
 export default (state = defaultState, action) => {
-    console.log('state', state)
-    console.log('action', action)
+    console.log('reducer-state', state)
+    console.log('reducer-action', action)
     if (action.type === CHANGE_INPUT_VALUE) {
         // 对state作深拷贝
         const newState = JSON.parse(JSON.stringify(state))
         newState.inputValue = action.inputValue
         return newState
     }
+    // 初始化列表数据
     if (action.type === INIT_LIST_ACTION) {
         // 对state作深拷贝
         const newState = JSON.parse(JSON.stringify(state))
@@ -36,6 +37,5 @@ export default (state = defaultState, action) => {
         newState.listArr.splice(action.index, 1)
         return newState
     }
-
-    
+    return state
 }
