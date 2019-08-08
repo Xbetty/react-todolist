@@ -4,12 +4,12 @@ import React, { Component } from 'react';
 // import {Input, Button, List, Typography } from 'antd';
 import TodoItem from './TodoItem';
 // import TestProps from './TestProps';
-// import axiox from 'axios';
+// import axios from 'axios';
 // import ReactAnim from './ReactAnim';
 // 引入store目录下的index.js
 import store from './store'
 // 引入actionCreator
-import {getInputChangeAction, getAddItemAction, getDeleteTtemAction, getTodoList,} from './store/actionCreators'
+import {getInputChangeAction, getAddItemAction, getDeleteTtemAction, getInitList} from './store/actionCreators'
 import TodoListUI from './TodoListUI'
 import './style.css'
 
@@ -152,7 +152,7 @@ class TodoList extends Component{
     // 组件被挂在到页面之后，自动被执行
     componentDidMount(){
         console.log('componentDidMount')
-        // axiox.get('https://getman.cn/mock/api/todolist')
+        // axios.get('https://getman.cn/mock/api/todolist')
         // .then((res) => {
         //     console.log('success')
         //     const data = res.data
@@ -163,10 +163,16 @@ class TodoList extends Component{
         //     console.log('error')
         // })
 
+        // 使用redux-thunk中间件进行异步处理
+        // const action = getTodoList()
+        // store.dispatch(action)
+        // console.log('action', action)
 
-        const action = getTodoList()
+        // 使用redux-saga中间件进行异步处理
+        const action = getInitList()
+        // 派发action后不仅reducer能接收到action，saga也能接收到action
         store.dispatch(action)
-        console.log('action', action)
+
     }
 
     // componentWillReceiveProps() {
