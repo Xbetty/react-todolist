@@ -1,17 +1,32 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+
 // 引入antd组件
 // import 'antd/dist/antd.css';
 // import {Input, Button, List, Typography } from 'antd';
-import TodoItem from './TodoItem';
-// import TestProps from './TestProps';
+
+// 引入axios
 // import axios from 'axios';
+
+// 引入其他子组件
+import TodoItem from './TodoItem';
+import ReactReduxTodoList from './components/ReactRedux/'
+import TodoListUI from './TodoListUI'
+// import TestProps from './TestProps';
 // import ReactAnim from './ReactAnim';
-// 引入store目录下的index.js
+
+// 引入store
 import store from './store'
+
 // 引入actionCreator
 import {getInputChangeAction, getAddItemAction, getDeleteTtemAction, getInitList} from './store/actionCreators'
-import TodoListUI from './TodoListUI'
+
+// 引入样式
 import './style.css'
+
+// 引入react-redux
+// Provider组件，连接store
+import {Provider} from 'react-redux'
+import reactReduxStore from './components/ReactRedux/store'
 
 class TodoList extends Component{
     constructor(props){
@@ -255,13 +270,24 @@ class TodoList extends Component{
 
             // 拆分ui组件,ui组件为傻瓜组件,容器组件为聪明组件
             // ui组件负责页面的渲染,容器组件负责逻辑
-            <TodoListUI 
-                inputValue={this.state.inputValue}
-                listArr = {this.state.listArr}
-                handleInputChange = {this.handleInputChange}
-                handleBtnClick = {this.handleBtnClick}
-                handleItemDelete = {this.handleItemDelete}
-            />
+            <Fragment>
+                <TodoListUI 
+                    inputValue={this.state.inputValue}
+                    listArr = {this.state.listArr}
+                    handleInputChange = {this.handleInputChange}
+                    handleBtnClick = {this.handleBtnClick}
+                    handleItemDelete = {this.handleItemDelete}
+                />
+
+                <hr/>
+
+
+
+                <h2>react-redux</h2>
+                <Provider store={reactReduxStore}>
+                    <ReactReduxTodoList/>
+                </Provider>
+            </Fragment>
         )
     }
 }
